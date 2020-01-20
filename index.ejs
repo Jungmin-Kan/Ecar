@@ -1,0 +1,140 @@
+<html class="no-js">
+
+<head>
+	<meta charset="utf-8">
+	<title>jj-Ecar</title>
+	<meta name="description" content="">
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <link rel="shortcut icon" href="img/favicon.png"> -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet'>
+	<!-- Syntax Highlighter -->
+	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
+	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shThemeDefault.css" media="all">
+	<!-- Font Awesome CSS-->
+	<link rel="stylesheet" href="./css/font-awesome.min.css">
+	<!-- Normalize/Reset CSS-->
+	<link rel="stylesheet" href="./css/normalize.min.css">
+	<!-- Main CSS-->
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/table.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<!--get-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+	<script src="js/updatecar.js"></script>
+	
+</head>
+
+<body id="welcome">
+	<aside class="left-sidebar">
+		<div class="logo">
+			<br>
+		</div>
+		<nav class="left-nav">
+			<ul id="nav">
+				<li class="current"><a href="#welcome">전기차 소개</a></li>
+				<li><a href="#type">전기차 종류</a></li>
+				<li><a href="#oil-type">국내 자동차 연료통계</a></li>
+				<li><a href="#charge">충전소</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div id="main-wrapper">
+		<div class="main-content">
+
+			<section id="welcome">
+				<div class="content-header">
+					<h1>전기차 소개</h1>
+				</div>
+				<div class="welcome">
+					<h2 class="twenty">Welcome To Ecar</h2>
+
+					<p>전기차 운행에 필요한 모든 정보를 제공받으세요.</p>
+
+					<p>본 페이지는 소프트웨어 공학 수업 프로젝트 입니다. 전기차 운행에 필요한 정보를 제공하는 페이지로
+						자동차 종류, 연료별 비율, 충전소 위치와 같은 정보를 제공합니다.
+					</p>
+					<script type="text/javascript">SyntaxHighlighter.all()</script>
+				</div>
+
+				<div class="features">
+					<h2 class="twenty">충전기 타입 종류</h2>
+					<table cellspacing='0'>
+						<%for(var i = 32; i < 36;i++){ %>
+						<tr>
+							<%for(var j = 0; j < data[i].length;j++){ %>
+							<% if((i==33 || i==34) && (j==1 ||j==2 || j==3 || j==4)){%>
+							<td><img src='<%=data[i][j]%>' width="100%"></td>
+							<%}else{%>
+							<td><%=data[i][j] %></td>
+							<%} %>
+							<%} %>
+						</tr>
+						<%}%>
+						</table>
+				</div>
+			</section>
+			<section id="type">
+				<div class="content-header">
+					<h1>전기차 종류</h1>
+				</div>
+				<h2 class="title">국내 전기차 판매 차량</h2>
+				<div class="section-content">
+					<p>본 데이터는 현재 국내에서 판매되고 있는 자동차 목록과 정부지원 보조금을 나타내고 있습니다.</p>
+				</div>
+					<br>
+					<table cellspacing='0'>
+						<tr>
+							<td>차종</td>
+							<td>국고보조금지원금액(만원)</td>
+						</tr>
+						<% for (var i = 0; i < 32; i++) { %>
+						<tr>
+							<% for(var j = 0; j < data[i].length; j++){ if((i==0 && j==0) || (i==0 && j==1)|| (i==6 && j==0) || (i==12 && j==0)|| (i==13 && j==0)|| (i==15 && j==0)|| (i==16 && j==0)|| (i==17 && j==0)|| (i==27 && j==0)|| (i==28 && j==0)|| (i==28 && j==1)|| (i==29 && j==0)|| (i==30 && j==0)|| (i==31 && j==0)){continue;}else{%>
+							<td><%=data[i][j]%></td><%}%>
+							<%}%>
+						</tr>
+						<% } %>
+					</table>
+			</section>
+
+
+			<section id="oil-type">
+				<div class="content-header">
+					<h1>국내 연료별 차량 종류</h1>
+				</div>
+				<h2 class="title">데이터 정보</h2>
+				<p class="fifteen">본 데이터는 공공데이터 포탈로부터 제공받은 데이터로 2019년 9월 기준까지의 연료별 차량 등록 대수입니다.</p>
+				<pre class="brush: html">
+					<canvas id="myChart" width="100%" height="50%"></canvas>
+				</pre>
+			</section>
+
+			<section id="charge">
+				<div class="content-header">
+					<h1>충전소</h1>
+				</div>
+				<pre class="brush: html">
+						<iframe src="https://www.ev.or.kr/evmonitor"  width="100%" height="1000dp"frameborder="0">
+					</pre>
+			</section>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/custom.js"></script>
+</body>
+
+</html>
+<!-- https://www.ev.or.kr/portal -->
+<!-- <h2>https://www.ev.or.kr/portal/chargerkind?pMENUMST_ID=21629</h2>
+				<h2>https://velog.io/@yesdoing/Node.js-%EC%97%90%EC%84%9C-%EC%9B%B9-%ED%81%AC%EB%A1%A4%EB%A7%81%ED%95%98%EA%B8%B0-wtjugync1m
+					: 크롤링</h2> -->
+
+<!-- http://192.168.23.1:8080/index -->
