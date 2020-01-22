@@ -35,9 +35,8 @@ app.get('/index', (req, response) => {
   getHtml()
     .then(html => {
       let ulList = [];
-      const $ = cheerio.load(html.data); //html 문자열을 받아 cheerio 객체를 반환합니다.
+      const $ = cheerio.load(html.data);
       const $bodyList = $("table.table_02_2_1 tbody").eq(0).children("tr");
-      // 태그.class 안에 ul태그  안에  li태그.class이름
       for (var row = 0; row < $bodyList.length; row++) {
         var cells = $bodyList.eq(row).children();
         array[row] = new Array(cells);
@@ -86,12 +85,10 @@ app.get("/excel", function(req,res){
   let array = new Array();
 
   array.push(worksheet["U"+21].v);//휘발유
-  
   array.push(worksheet["U"+38].v);//경우
-  
   array.push(worksheet["U"+55].v);//LPG
-  
   array.push(worksheet["U"+89].v);//전기
+  
   res.send(array)
 });
 
