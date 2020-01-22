@@ -60,10 +60,9 @@ app.get('/index', (req, response) => {
       }
       conngetHtml()
         .then(html => {
-          const $ = cheerio.load(html.data); //html 문자열을 받아 cheerio 객체를 반환합니다.
+          const $ = cheerio.load(html.data); 
           const $mainbody = $("table").eq(2);
           const $bodyList = $mainbody.children("tbody").children("tr");
-          // 태그.class 안에 ul태그  안에  li태그.class이름
           for (var row = 0; row < $bodyList.length; row++) {
             var cells = $bodyList.eq(row).children();
             array[32 + row] = new Array(cells);
@@ -77,7 +76,7 @@ app.get('/index', (req, response) => {
             }
           }
           return array;
-        }).then(res => response.render("index", { data: res })); // return된 data는 res가 된다
+        }).then(res => response.render("index", { data: res }));
     });
   });
 app.get("/excel", function(req,res){
@@ -94,7 +93,6 @@ app.get("/excel", function(req,res){
   
   array.push(worksheet["U"+89].v);//전기
   res.send(array)
-  // https://victorydntmd.tistory.com/40
 });
 
 app.get("*", (req, res) => { res.json("Page not found"); });
@@ -103,4 +101,3 @@ if (!module.parent) {
   app.listen(8085);
   console.log('started on port 8080');
 }
-  // http://happinessoncode.com/2018/05/20/nodejs-exports-and-module-exports/
