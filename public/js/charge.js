@@ -16,7 +16,6 @@ conngetHtml()
         const $mainbody = $("table").eq(2);
 
         const $bodyList = $mainbody.children("tbody").children("tr");
-        // 태그.class 안에 ul태그  안에  li태그.class이름
         for (var row = 0; row < $bodyList.length; row++) {
             var cells = $bodyList.eq(row).children();
             var cols = [];
