@@ -14,24 +14,38 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', './');
 
+/*
+var getHtml = async () => {
+  try {
+    return await axios.get("https://ev.or.kr/portal/buyersGuide/incenTive?pMENUMST_ID=21549");
+  } catch (error) {
+    console.error(error);
+  }
+};
+*/
+function getHtml() {
+  try {
+    return axios.get("https://ev.or.kr/portal/buyersGuide/incenTive?pMENUMST_ID=21549");
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// var conngetHtml = async () => {
+//   try { return await axios.get("https://www.ev.or.kr/portal/chargerkind?pMENUMST_ID=21629"); }
+//   catch (error) { console.error(error); }
+// };
+function conngetHtml() {
+  try {
+    return axios.get("https://www.ev.or.kr/portal/chargerkind?pMENUMST_ID=21629");
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 app.get('/index', (req, response) => {
   let array = new Array();
-  let List = new Array();
-  // var getHtml = async () => {
-  //   try {
-  //     return await axios.get("https://ev.or.kr/portal/buyersGuide/incenTive?pMENUMST_ID=21549");
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  function getHtml() {
-    try {
-      return axios.get("https://ev.or.kr/portal/buyersGuide/incenTive?pMENUMST_ID=21549");
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  
+  let List = new Array();  
   getHtml()
     .then(html => {
       let ulList = [];
@@ -43,18 +57,6 @@ app.get('/index', (req, response) => {
         for (var column = 0; column < cells.length; column++) {
           var hero = cells.eq(column).text();
           array[row][column] = hero;
-        }
-      }
-
-      // var conngetHtml = async () => {
-      //   try { return await axios.get("https://www.ev.or.kr/portal/chargerkind?pMENUMST_ID=21629"); }
-      //   catch (error) { console.error(error); }
-      // };
-      function conngetHtml() {
-        try {
-          return axios.get("https://www.ev.or.kr/portal/chargerkind?pMENUMST_ID=21629");
-        } catch (error) {
-          console.error(error);
         }
       }
       conngetHtml()
